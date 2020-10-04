@@ -16,6 +16,7 @@ function initializeCode() {
   console.log("Initializing");
 
   renderBoard();
+  progressBar();
 }
 
 let turn = "x";
@@ -40,12 +41,21 @@ function renderBoard() {
           return;
         }
         cell.innerHTML = turn;
+        if (turn === x) {
+          cell.style.backgroundColor = "rgb(124,252,0)";
+        } else if (turn === o) {
+          cell.style.backgroundColor = "rgb(250,128,114)";
+        }
+
         checkWinner(cell);
+
         turn = turn === x ? o : x;
       };
     }
   }
 }
+
+function progressBar() {}
 
 function checkWinner(cell) {
   let paske = cell.getAttribute("id");
