@@ -14,15 +14,15 @@ if (document.readyState !== "loading") {
 
 function initializeCode() {
   console.log("Initializing");
-
-  renderBoard();
   progressBar();
+  renderBoard();
 }
 
 let turn = "x";
 const x = "x";
 const o = "o";
 let tableBoard;
+let width = 0;
 
 function renderBoard() {
   //renders the 5x5 board
@@ -50,6 +50,7 @@ function renderBoard() {
         checkWinner(cell);
 
         turn = turn === x ? o : x;
+        resetBar();
       };
     }
   }
@@ -57,16 +58,24 @@ function renderBoard() {
 
 function progressBar() {
   let elem = document.getElementById("progressBar");
-  let width = 1;
-  let id = setInterval(frame, 10);
+  setInterval(frame, 10);
   function frame() {
     if (width >= 100) {
-      clearInterval(id);
+      if (turn === x) {
+        turn = o;
+      } else if (turn === o) {
+        turn = x;
+      }
+      width = 0;
     } else {
-      width++;
+      width = width + 0.1;
       elem.style.width = width + "%";
     }
   }
+}
+
+function resetBar() {
+  width = 0;
 }
 
 function checkWinner(cell) {
