@@ -16,3 +16,7 @@ td {
   text-align: center;
   font-size: 30px;
 }
+.progressBar {
+  height: 24px;
+  width: 1%;
+}
